@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="frontdeskdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="box">
+    <Key>
+      <PropertyRef Name="boxid" />
+    </Key>
+    <Property Name="boxid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="boxtypeid" Type="int" Nullable="false" />
+    <Property Name="boxnumber" Type="int" Nullable="false" />
+    <Property Name="isavailable" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="boxtype">
+    <Key>
+      <PropertyRef Name="boxtypeid" />
+    </Key>
+    <Property Name="boxtypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="boxtype" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="customerid" />
+    </Key>
+    <Property Name="customerid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar" MaxLength="50" />
+    <Property Name="lastname" Type="nvarchar" MaxLength="50" />
+    <Property Name="phonenumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="customerrecord">
+    <Key>
+      <PropertyRef Name="customerrecordid" />
+    </Key>
+    <Property Name="customerrecordid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerid" Type="int" />
+    <Property Name="boxid" Type="int" />
+  </EntityType>
+  <Association Name="FK_box_boxtype">
+    <End Role="boxtype" Type="Self.boxtype" Multiplicity="1" />
+    <End Role="box" Type="Self.box" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="boxtype">
+        <PropertyRef Name="boxtypeid" />
+      </Principal>
+      <Dependent Role="box">
+        <PropertyRef Name="boxtypeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerrecord_box1">
+    <End Role="box" Type="Self.box" Multiplicity="0..1" />
+    <End Role="customerrecord" Type="Self.customerrecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="box">
+        <PropertyRef Name="boxid" />
+      </Principal>
+      <Dependent Role="customerrecord">
+        <PropertyRef Name="boxid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerrecord_customerrecord">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="customerrecord" Type="Self.customerrecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customerid" />
+      </Principal>
+      <Dependent Role="customerrecord">
+        <PropertyRef Name="customerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="frontdeskdbModelStoreContainer">
+    <EntitySet Name="box" EntityType="Self.box" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="boxtype" EntityType="Self.boxtype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customerrecord" EntityType="Self.customerrecord" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_box_boxtype" Association="Self.FK_box_boxtype">
+      <End Role="boxtype" EntitySet="boxtype" />
+      <End Role="box" EntitySet="box" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerrecord_box1" Association="Self.FK_customerrecord_box1">
+      <End Role="box" EntitySet="box" />
+      <End Role="customerrecord" EntitySet="customerrecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerrecord_customerrecord" Association="Self.FK_customerrecord_customerrecord">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="customerrecord" EntitySet="customerrecord" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

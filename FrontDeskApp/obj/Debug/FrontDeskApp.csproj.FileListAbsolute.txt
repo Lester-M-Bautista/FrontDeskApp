@@ -1,0 +1,15 @@
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\bin\Debug\FrontDeskApp.exe.config
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\bin\Debug\FrontDeskApp.exe
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\bin\Debug\FrontDeskApp.pdb
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.csprojAssemblyReference.cache
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.Properties.Resources.resources
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.csproj.GenerateResource.cache
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.exe
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.pdb
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.Forms.frmMainMenu.resources
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\bin\Debug\EntityFramework.dll
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\bin\Debug\EntityFramework.xml
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.Forms.frmCustomerInformation.resources
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.csproj.CopyComplete
+C:\Users\User\source\repos\FrontDeskApp\FrontDeskApp\obj\Debug\FrontDeskApp.Modals.ModCustomerInformation.resources

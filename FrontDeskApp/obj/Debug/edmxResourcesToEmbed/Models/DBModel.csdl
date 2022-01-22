@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="frontdeskdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="box">
+    <Key>
+      <PropertyRef Name="boxid" />
+    </Key>
+    <Property Name="boxid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="boxtypeid" Type="Int32" Nullable="false" />
+    <Property Name="boxnumber" Type="Int32" Nullable="false" />
+    <Property Name="isavailable" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="boxtype" Relationship="Self.FK_box_boxtype" FromRole="box" ToRole="boxtype" />
+    <NavigationProperty Name="customerrecord" Relationship="frontdeskdbModel.FK_customerrecord_box1" FromRole="box" ToRole="customerrecord" />
+  </EntityType>
+  <EntityType Name="boxtype">
+    <Key>
+      <PropertyRef Name="boxtypeid" />
+    </Key>
+    <Property Name="boxtypeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="boxtype1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="box" Relationship="Self.FK_box_boxtype" FromRole="boxtype" ToRole="box" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="customerid" />
+    </Key>
+    <Property Name="customerid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="customerrecord" Relationship="frontdeskdbModel.FK_customerrecord_customerrecord" FromRole="customer" ToRole="customerrecord" />
+  </EntityType>
+  <Association Name="FK_box_boxtype">
+    <End Role="boxtype" Type="Self.boxtype" Multiplicity="1" />
+    <End Role="box" Type="Self.box" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="boxtype">
+        <PropertyRef Name="boxtypeid" />
+      </Principal>
+      <Dependent Role="box">
+        <PropertyRef Name="boxtypeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="box" EntityType="Self.box" />
+    <EntitySet Name="boxtype" EntityType="Self.boxtype" />
+    <EntitySet Name="customer" EntityType="Self.customer" />
+    <AssociationSet Name="FK_box_boxtype" Association="Self.FK_box_boxtype">
+      <End Role="boxtype" EntitySet="boxtype" />
+      <End Role="box" EntitySet="box" />
+    </AssociationSet>
+    <EntitySet Name="customerrecord" EntityType="frontdeskdbModel.customerrecord" />
+    <AssociationSet Name="FK_customerrecord_box1" Association="frontdeskdbModel.FK_customerrecord_box1">
+      <End Role="box" EntitySet="box" />
+      <End Role="customerrecord" EntitySet="customerrecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customerrecord_customerrecord" Association="frontdeskdbModel.FK_customerrecord_customerrecord">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="customerrecord" EntitySet="customerrecord" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="customerrecord">
+    <Key>
+      <PropertyRef Name="customerrecordid" />
+    </Key>
+    <Property Name="customerrecordid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerid" Type="Int32" />
+    <Property Name="boxid" Type="Int32" />
+    <NavigationProperty Name="box" Relationship="frontdeskdbModel.FK_customerrecord_box1" FromRole="customerrecord" ToRole="box" />
+    <NavigationProperty Name="customer" Relationship="frontdeskdbModel.FK_customerrecord_customerrecord" FromRole="customerrecord" ToRole="customer" />
+  </EntityType>
+  <Association Name="FK_customerrecord_box1">
+    <End Type="frontdeskdbModel.box" Role="box" Multiplicity="0..1" />
+    <End Type="frontdeskdbModel.customerrecord" Role="customerrecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="box">
+        <PropertyRef Name="boxid" />
+      </Principal>
+      <Dependent Role="customerrecord">
+        <PropertyRef Name="boxid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customerrecord_customerrecord">
+    <End Type="frontdeskdbModel.customer" Role="customer" Multiplicity="0..1" />
+    <End Type="frontdeskdbModel.customerrecord" Role="customerrecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customerid" />
+      </Principal>
+      <Dependent Role="customerrecord">
+        <PropertyRef Name="customerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

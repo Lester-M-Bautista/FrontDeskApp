@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fea7ad7b4a75481dab0ee3f1e9a04e82" Name="Diagram1">
+        <EntityTypeShape EntityType="frontdeskdbModel.box" Width="1.5" PointX="2.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="frontdeskdbModel.boxtype" Width="1.5" PointX="0.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="frontdeskdbModel.customer" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="frontdeskdbModel.FK_box_boxtype" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="frontdeskdbModel.customerrecord" Width="1.5" PointX="5.125" PointY="1" />
+        <AssociationConnector Association="frontdeskdbModel.FK_customerrecord_box1" />
+        <AssociationConnector Association="frontdeskdbModel.FK_customerrecord_customerrecord" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
