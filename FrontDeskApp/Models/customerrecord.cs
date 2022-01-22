@@ -9,6 +9,7 @@
 
 namespace FrontDeskApp.Models
 {
+    using FrontDeskApp.BaseValidatorObject;
     using System;
     using System.Collections.Generic;
     
@@ -17,7 +18,11 @@ namespace FrontDeskApp.Models
         public int customerrecordid { get; set; }
         public Nullable<int> customerid { get; set; }
         public Nullable<int> boxid { get; set; }
-    
+        public Nullable<int> boxtypeid { get; set; }
+        public string status { get; set; }
+
+        public BaseValidator Validation { get; set; }
+
         public virtual box box { get; set; }
         public virtual customer customer { get; set; }
     }

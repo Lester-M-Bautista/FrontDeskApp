@@ -24,7 +24,9 @@ namespace FrontDeskApp.Models
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string phonenumber { get; set; }
+
         public BaseValidator Validation { get; set; }
+
         public virtual ICollection<customerrecord> customerrecord { get; set; }
     }
 }

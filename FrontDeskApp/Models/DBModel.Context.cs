@@ -26,8 +26,8 @@ namespace FrontDeskApp.Models
         }
     
         public DbSet<box> box { get; set; }
-        public DbSet<boxtype> boxtype { get; set; }
         public DbSet<customer> customer { get; set; }
+        public DbSet<boxtype> boxtype { get; set; }
         public DbSet<customerrecord> customerrecord { get; set; }
     }
 }

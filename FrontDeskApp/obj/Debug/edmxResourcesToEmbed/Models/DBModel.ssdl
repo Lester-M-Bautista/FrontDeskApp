@@ -14,7 +14,7 @@
       <PropertyRef Name="boxtypeid" />
     </Key>
     <Property Name="boxtypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="boxtype" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="boxtypename" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="customer">
     <Key>
@@ -32,6 +32,7 @@
     <Property Name="customerrecordid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="customerid" Type="int" />
     <Property Name="boxid" Type="int" />
+    <Property Name="status" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_box_boxtype">
     <End Role="boxtype" Type="Self.boxtype" Multiplicity="1" />
@@ -57,7 +58,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_customerrecord_customerrecord">
+  <Association Name="FK_customerrecord_customer">
     <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
     <End Role="customerrecord" Type="Self.customerrecord" Multiplicity="*" />
     <ReferentialConstraint>
@@ -82,7 +83,7 @@
       <End Role="box" EntitySet="box" />
       <End Role="customerrecord" EntitySet="customerrecord" />
     </AssociationSet>
-    <AssociationSet Name="FK_customerrecord_customerrecord" Association="Self.FK_customerrecord_customerrecord">
+    <AssociationSet Name="FK_customerrecord_customer" Association="Self.FK_customerrecord_customer">
       <End Role="customer" EntitySet="customer" />
       <End Role="customerrecord" EntitySet="customerrecord" />
     </AssociationSet>

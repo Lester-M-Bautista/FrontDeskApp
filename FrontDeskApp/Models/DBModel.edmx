@@ -19,7 +19,7 @@
             <PropertyRef Name="boxtypeid" />
           </Key>
           <Property Name="boxtypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="boxtype" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="boxtypename" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
@@ -37,6 +37,7 @@
           <Property Name="customerrecordid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="customerid" Type="int" />
           <Property Name="boxid" Type="int" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_box_boxtype">
           <End Role="boxtype" Type="Self.boxtype" Multiplicity="1" />
@@ -62,7 +63,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_customerrecord_customerrecord">
+        <Association Name="FK_customerrecord_customer">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="customerrecord" Type="Self.customerrecord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -87,7 +88,7 @@
             <End Role="box" EntitySet="box" />
             <End Role="customerrecord" EntitySet="customerrecord" />
           </AssociationSet>
-          <AssociationSet Name="FK_customerrecord_customerrecord" Association="Self.FK_customerrecord_customerrecord">
+          <AssociationSet Name="FK_customerrecord_customer" Association="Self.FK_customerrecord_customer">
             <End Role="customer" EntitySet="customer" />
             <End Role="customerrecord" EntitySet="customerrecord" />
           </AssociationSet>
@@ -104,16 +105,8 @@
           <Property Name="boxtypeid" Type="Int32" Nullable="false" />
           <Property Name="boxnumber" Type="Int32" Nullable="false" />
           <Property Name="isavailable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="boxtype" Relationship="Self.FK_box_boxtype" FromRole="box" ToRole="boxtype" />
+          <NavigationProperty Name="boxtype" Relationship="frontdeskdbModel.FK_box_boxtype" FromRole="box" ToRole="boxtype" />
           <NavigationProperty Name="customerrecord" Relationship="frontdeskdbModel.FK_customerrecord_box1" FromRole="box" ToRole="customerrecord" />
-        </EntityType>
-        <EntityType Name="boxtype">
-          <Key>
-            <PropertyRef Name="boxtypeid" />
-          </Key>
-          <Property Name="boxtypeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="boxtype1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="box" Relationship="Self.FK_box_boxtype" FromRole="boxtype" ToRole="box" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
@@ -123,11 +116,37 @@
           <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="customerrecord" Relationship="frontdeskdbModel.FK_customerrecord_customerrecord" FromRole="customer" ToRole="customerrecord" />
+          <NavigationProperty Name="customerrecord" Relationship="frontdeskdbModel.FK_customerrecord_customer" FromRole="customer" ToRole="customerrecord" />
+        </EntityType>
+        <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="box" EntityType="Self.box" />
+          <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="boxtype" EntityType="frontdeskdbModel.boxtype" />
+          <AssociationSet Name="FK_box_boxtype" Association="frontdeskdbModel.FK_box_boxtype">
+            <End Role="boxtype" EntitySet="boxtype" />
+            <End Role="box" EntitySet="box" />
+          </AssociationSet>
+          <EntitySet Name="customerrecord" EntityType="frontdeskdbModel.customerrecord" />
+          <AssociationSet Name="FK_customerrecord_box1" Association="frontdeskdbModel.FK_customerrecord_box1">
+            <End Role="box" EntitySet="box" />
+            <End Role="customerrecord" EntitySet="customerrecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customerrecord_customer" Association="frontdeskdbModel.FK_customerrecord_customer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="customerrecord" EntitySet="customerrecord" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="boxtype">
+          <Key>
+            <PropertyRef Name="boxtypeid" />
+          </Key>
+          <Property Name="boxtypeid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="boxtypename" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="box" Relationship="frontdeskdbModel.FK_box_boxtype" FromRole="boxtype" ToRole="box" />
         </EntityType>
         <Association Name="FK_box_boxtype">
-          <End Role="boxtype" Type="Self.boxtype" Multiplicity="1" />
-          <End Role="box" Type="Self.box" Multiplicity="*" />
+          <End Type="frontdeskdbModel.boxtype" Role="boxtype" Multiplicity="1" />
+          <End Type="frontdeskdbModel.box" Role="box" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="boxtype">
               <PropertyRef Name="boxtypeid" />
@@ -137,24 +156,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="box" EntityType="Self.box" />
-          <EntitySet Name="boxtype" EntityType="Self.boxtype" />
-          <EntitySet Name="customer" EntityType="Self.customer" />
-          <AssociationSet Name="FK_box_boxtype" Association="Self.FK_box_boxtype">
-            <End Role="boxtype" EntitySet="boxtype" />
-            <End Role="box" EntitySet="box" />
-          </AssociationSet>
-          <EntitySet Name="customerrecord" EntityType="frontdeskdbModel.customerrecord" />
-          <AssociationSet Name="FK_customerrecord_box1" Association="frontdeskdbModel.FK_customerrecord_box1">
-            <End Role="box" EntitySet="box" />
-            <End Role="customerrecord" EntitySet="customerrecord" />
-          </AssociationSet>
-          <AssociationSet Name="FK_customerrecord_customerrecord" Association="frontdeskdbModel.FK_customerrecord_customerrecord">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="customerrecord" EntitySet="customerrecord" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="customerrecord">
           <Key>
             <PropertyRef Name="customerrecordid" />
@@ -162,8 +163,9 @@
           <Property Name="customerrecordid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="customerid" Type="Int32" />
           <Property Name="boxid" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="box" Relationship="frontdeskdbModel.FK_customerrecord_box1" FromRole="customerrecord" ToRole="box" />
-          <NavigationProperty Name="customer" Relationship="frontdeskdbModel.FK_customerrecord_customerrecord" FromRole="customerrecord" ToRole="customer" />
+          <NavigationProperty Name="customer" Relationship="frontdeskdbModel.FK_customerrecord_customer" FromRole="customerrecord" ToRole="customer" />
         </EntityType>
         <Association Name="FK_customerrecord_box1">
           <End Type="frontdeskdbModel.box" Role="box" Multiplicity="0..1" />
@@ -177,7 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_customerrecord_customerrecord">
+        <Association Name="FK_customerrecord_customer">
           <End Type="frontdeskdbModel.customer" Role="customer" Multiplicity="0..1" />
           <End Type="frontdeskdbModel.customerrecord" Role="customerrecord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -189,7 +191,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -205,14 +207,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="boxtype">
-            <EntityTypeMapping TypeName="frontdeskdbModel.boxtype">
-              <MappingFragment StoreEntitySet="boxtype">
-                <ScalarProperty Name="boxtypeid" ColumnName="boxtypeid" />
-                <ScalarProperty Name="boxtype1" ColumnName="boxtype" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="customer">
             <EntityTypeMapping TypeName="frontdeskdbModel.customer">
               <MappingFragment StoreEntitySet="customer">
@@ -223,9 +217,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="boxtype">
+            <EntityTypeMapping TypeName="frontdeskdbModel.boxtype">
+              <MappingFragment StoreEntitySet="boxtype">
+                <ScalarProperty Name="boxtypename" ColumnName="boxtypename" />
+                <ScalarProperty Name="boxtypeid" ColumnName="boxtypeid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="customerrecord">
             <EntityTypeMapping TypeName="frontdeskdbModel.customerrecord">
               <MappingFragment StoreEntitySet="customerrecord">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="boxid" ColumnName="boxid" />
                 <ScalarProperty Name="customerid" ColumnName="customerid" />
                 <ScalarProperty Name="customerrecordid" ColumnName="customerrecordid" />

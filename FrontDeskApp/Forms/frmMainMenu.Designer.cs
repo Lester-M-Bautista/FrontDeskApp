@@ -44,10 +44,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.BackgroundImage = global::FrontDeskApp.Properties.Resources.normal;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.groupBox1.Controls.Add(this.menuStrip1);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Location = new System.Drawing.Point(49, 72);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(281, 675);
@@ -74,6 +75,8 @@
             // 
             // customersInformationToolStripMenuItem
             // 
+            this.customersInformationToolStripMenuItem.Checked = true;
+            this.customersInformationToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.customersInformationToolStripMenuItem.ForeColor = System.Drawing.Color.Blue;
             this.customersInformationToolStripMenuItem.Name = "customersInformationToolStripMenuItem";
             this.customersInformationToolStripMenuItem.Size = new System.Drawing.Size(265, 36);
@@ -86,6 +89,7 @@
             this.boxTypeToolStripMenuItem.Name = "boxTypeToolStripMenuItem";
             this.boxTypeToolStripMenuItem.Size = new System.Drawing.Size(265, 36);
             this.boxTypeToolStripMenuItem.Text = "Box type";
+            this.boxTypeToolStripMenuItem.Click += new System.EventHandler(this.boxTypeToolStripMenuItem_Click);
             // 
             // boxNumberToolStripMenuItem
             // 
@@ -93,6 +97,7 @@
             this.boxNumberToolStripMenuItem.Name = "boxNumberToolStripMenuItem";
             this.boxNumberToolStripMenuItem.Size = new System.Drawing.Size(265, 36);
             this.boxNumberToolStripMenuItem.Text = "Box Number";
+            this.boxNumberToolStripMenuItem.Click += new System.EventHandler(this.boxNumberToolStripMenuItem_Click);
             // 
             // retrivedRestoredToolStripMenuItem
             // 
@@ -100,6 +105,7 @@
             this.retrivedRestoredToolStripMenuItem.Name = "retrivedRestoredToolStripMenuItem";
             this.retrivedRestoredToolStripMenuItem.Size = new System.Drawing.Size(265, 36);
             this.retrivedRestoredToolStripMenuItem.Text = "Retrived / Restored";
+            this.retrivedRestoredToolStripMenuItem.Click += new System.EventHandler(this.retrivedRestoredToolStripMenuItem_Click);
             // 
             // TabControl
             // 
@@ -136,9 +142,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(511, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(436, 39);
+            this.label1.Size = new System.Drawing.Size(372, 39);
             this.label1.TabIndex = 52;
-            this.label1.Text = "Storage Facilities System";
+            this.label1.Text = "Frontdesk Application";
             // 
             // frmMainMenu
             // 

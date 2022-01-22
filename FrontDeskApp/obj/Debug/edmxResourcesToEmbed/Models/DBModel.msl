@@ -11,14 +11,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="boxtype">
-      <EntityTypeMapping TypeName="frontdeskdbModel.boxtype">
-        <MappingFragment StoreEntitySet="boxtype">
-          <ScalarProperty Name="boxtypeid" ColumnName="boxtypeid" />
-          <ScalarProperty Name="boxtype1" ColumnName="boxtype" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="customer">
       <EntityTypeMapping TypeName="frontdeskdbModel.customer">
         <MappingFragment StoreEntitySet="customer">
@@ -29,9 +21,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="boxtype">
+      <EntityTypeMapping TypeName="frontdeskdbModel.boxtype">
+        <MappingFragment StoreEntitySet="boxtype">
+          <ScalarProperty Name="boxtypename" ColumnName="boxtypename" />
+          <ScalarProperty Name="boxtypeid" ColumnName="boxtypeid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="customerrecord">
       <EntityTypeMapping TypeName="frontdeskdbModel.customerrecord">
         <MappingFragment StoreEntitySet="customerrecord">
+          <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="boxid" ColumnName="boxid" />
           <ScalarProperty Name="customerid" ColumnName="customerid" />
           <ScalarProperty Name="customerrecordid" ColumnName="customerrecordid" />

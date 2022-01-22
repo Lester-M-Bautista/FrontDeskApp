@@ -9,6 +9,7 @@
 
 namespace FrontDeskApp.Models
 {
+    using FrontDeskApp.BaseValidatorObject;
     using System;
     using System.Collections.Generic;
     
@@ -20,8 +21,10 @@ namespace FrontDeskApp.Models
         }
     
         public int boxtypeid { get; set; }
-        public string boxtype1 { get; set; }
-    
+        public string boxtypename { get; set; }
+
+        public BaseValidator Validation { get; set; }
+
         public virtual ICollection<box> box { get; set; }
     }
 }
