@@ -104,7 +104,7 @@
             this.retrivedRestoredToolStripMenuItem.ForeColor = System.Drawing.Color.Blue;
             this.retrivedRestoredToolStripMenuItem.Name = "retrivedRestoredToolStripMenuItem";
             this.retrivedRestoredToolStripMenuItem.Size = new System.Drawing.Size(265, 36);
-            this.retrivedRestoredToolStripMenuItem.Text = "Retrived / Restored";
+            this.retrivedRestoredToolStripMenuItem.Text = "Stored / Retrieved";
             this.retrivedRestoredToolStripMenuItem.Click += new System.EventHandler(this.retrivedRestoredToolStripMenuItem_Click);
             // 
             // TabControl
